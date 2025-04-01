@@ -1,3 +1,5 @@
+#!/Users/lbs/Desktop/111/.venv/bin/python3
+
 # 导入名为tushare的python库
 import tushare as ts
 # 导入datetime模块
@@ -5,22 +7,12 @@ import datetime
 # 导入pandas模块
 import pandas as pd
 # 设置token
-ts.set_token('')
+ts.set_token('a4589952c9262949c081834c03f3e729021f8a282b65497047f2162c')
 # 初始化pro接口
 pro = ts.pro_api()
 
-'''
-# 获取当前日期
-trade_date = datetime.datetime.now().strftime('%Y%m%d')
-# 设置结束日期并查询30天以前的
-end_date = datetime.datetime.now().strftime('%Y%m%d')
-# 设置开始日期
-start_date = (datetime.datetime.now() - datetime.timedelta(days=30)).strftime('%Y%m%d')
-# 获取从2025年1月1日到现在的数据
-start_date = "20250101"
-end_date = datetime.datetime.now().strftime('%Y%m%d')
-'''
-# 特定日期范围
+# *********************************************日线行情备份接口的使用*********************************
+# 特定日期范围，用于创建日期循环的参数，假如需要指定的日期就把这个逻辑注释掉，直接填写在接口body的地方。
 start_date = "20250315"
 end_date = "20250320"
 
@@ -64,15 +56,16 @@ for date in date_range:
 
 # 将所有结果保存到CSV文件
 if not all_results.empty:
-    all_results.to_csv('~/Desktop/bak_daily_all.csv', index=False)
+    all_results.to_csv('/Users/lbs/Desktop/bak_daily_all.csv', index=False)
     print("所有数据已成功保存为 CSV 文件！")
 else:
     print("未获取到任何数据")
 
+
 '''
 # 龙虎榜每日明细，每天只能访问这个接口两次
 df2 = pro.hm_detail(**{
-    "trade_date": trade_date,
+    "trade_date": "20250328",
     "ts_code": "",
     "hm_name": "",
     "start_date": "",
