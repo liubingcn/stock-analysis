@@ -11,10 +11,21 @@ ts.set_token('a4589952c9262949c081834c03f3e729021f8a282b65497047f2162c')
 # 初始化pro接口
 pro = ts.pro_api()
 
-# *********************************************日线行情备份接口的使用*********************************
+# *********************************************DF1_日线行情备份接口的使用*********************************
 # 特定日期范围，用于创建日期循环的参数，假如需要指定的日期就把这个逻辑注释掉，直接填写在接口body的地方。
-start_date = "20250315"
-end_date = "20250320"
+start_date = "20240718"
+end_date = "20250406"
+
+# 创建中文表头映射
+column_mapping = {
+    "ts_code": "股票代码",
+    "trade_date": "交易日期",
+    "name": "股票名称",
+    "pct_change": "涨跌幅",
+    "close": "收盘价",
+    "vol_ratio": "量比",
+    "turn_over": "换手率"
+}
 
 # 创建空DataFrame用于存储结果
 all_results = pd.DataFrame()
@@ -40,7 +51,9 @@ for date in date_range:
         "trade_date",
         "name",
         "pct_change",
-        "close"
+        "close",
+        "vol_ratio",
+        "turn_over"
     ])
 
 # 将pct_change转换为百分比格式
@@ -56,6 +69,9 @@ for date in date_range:
 
 # 将所有结果保存到CSV文件
 if not all_results.empty:
+    # 重命名列
+    all_results = all_results.rename(columns=column_mapping)
+    # 保存到CSV文件
     all_results.to_csv('~/Desktop/bak_daily_all.csv', index=False)
     print("所有数据已成功保存为 CSV 文件！")
 else:
@@ -63,7 +79,7 @@ else:
 
 
 '''
-# *********************************************龙虎榜每日明细接口的使用*********************************
+# *********************************************DF2_龙虎榜每日明细接口的使用*********************************
 # 龙虎榜每日明细，每天只能访问这个接口两次
 df2 = pro.hm_detail(**{
     "trade_date": "20250328",
@@ -86,4 +102,7 @@ df2 = pro.hm_detail(**{
 df2.to_csv('~/Desktop/hm_detail.csv', index=False)
 # 打印提示信息
 print("hm_detail 数据已成功保存为 CSV 文件！")
+'''
+'''
+# *********************************************DF3_接口的使用*********************************
 '''
