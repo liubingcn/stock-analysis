@@ -7,7 +7,7 @@ import datetime
 # 导入pandas模块
 import pandas as pd
 # 设置token
-ts.set_token('a4589952c9262949c081834c03f3e729021f8a282b65497047f2162c')
+ts.set_token(API_TOKEN)
 # 初始化pro接口
 pro = ts.pro_api()
 
