@@ -2,10 +2,10 @@
 
 # 导入名为tushare的python库
 import tushare as ts
-# 导入datetime模块
-import datetime
 # 导入pandas模块
 import pandas as pd
+# 导入配置文件
+from config import API_TOKEN
 # 设置token
 ts.set_token(API_TOKEN)
 # 初始化pro接口
@@ -13,8 +13,8 @@ pro = ts.pro_api()
 
 # *********************************************DF1_日线行情备份接口的使用*********************************
 # 特定日期范围，用于创建日期循环的参数，假如需要指定的日期就把这个逻辑注释掉，直接填写在接口body的地方。
-start_date = "20240718"
-end_date = "20250406"
+start_date = "20241007"
+end_date = "20241008"
 
 # 创建中文表头映射
 column_mapping = {
