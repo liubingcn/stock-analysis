@@ -1,4 +1,4 @@
-#!/Users/lbs/Desktop/111/.venv/bin/python3
+#!/usr/bin/env python3
 
 # 导入名为tushare的python库
 import tushare as ts
