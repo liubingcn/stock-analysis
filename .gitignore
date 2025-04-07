@@ -4,3 +4,5 @@
 *.csv # 忽略 CSV 文件（如果你不想版本控制数据文件）
 # config files
 config.py
+__pycache__/
+*.py[cod]
