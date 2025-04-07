@@ -1,7 +1,8 @@
 .DS_Store
 *.pyc # 忽略 Python 编译文件
-__pycache__/ # 忽略 Python 缓存目录
 *.log # 忽略日志文件
 *.csv # 忽略 CSV 文件（如果你不想版本控制数据文件）
 # config files
 config.py
+__pycache__/
+*.py[cod]

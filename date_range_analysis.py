@@ -1,4 +1,4 @@
-#!/Users/lbs/Desktop/111/.venv/bin/python3
+#!/usr/bin/env python3
 
 # 导入名为tushare的python库
 import tushare as ts
@@ -76,33 +76,3 @@ if not all_results.empty:
     print("所有数据已成功保存为 CSV 文件！")
 else:
     print("未获取到任何数据")
-
-
-'''
-# *********************************************DF2_龙虎榜每日明细接口的使用*********************************
-# 龙虎榜每日明细，每天只能访问这个接口两次
-df2 = pro.hm_detail(**{
-    "trade_date": "20250328",
-    "ts_code": "",
-    "hm_name": "",
-    "start_date": "",
-    "end_date": "",
-    "limit": "",
-    "offset": ""
-}, fields=[
-    "trade_date",
-    "ts_code",
-    "ts_name",
-    "buy_amount",
-    "sell_amount",
-    "net_amount",
-    "hm_name"
-])
-# 将数据保存到CSV文件
-df2.to_csv('~/Desktop/hm_detail.csv', index=False)
-# 打印提示信息
-print("hm_detail 数据已成功保存为 CSV 文件！")
-'''
-'''
-# *********************************************DF3_接口的使用*********************************
-'''
