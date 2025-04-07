@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
-
-# 导入名为tushare的python库
+# 导入必要的模块
 import tushare as ts
-# 导入pandas模块
 import pandas as pd
-# 导入配置文件
+import datetime
 from config import API_TOKEN
-# 设置token
+
+# 获取当前时间戳
+current_time = datetime.datetime.now().strftime('%Y%m%d')
+
+# 全局配置和初始化
 ts.set_token(API_TOKEN)
-# 初始化pro接口
 pro = ts.pro_api()
+
+# 共享的日期配置
+start_date = "20241007"
+end_date = "20241008"
+date_range = pd.date_range(start=start_date, end=end_date)
 
 # *********************************************DF1_日线行情备份接口的使用*********************************
 # 特定日期范围，用于创建日期循环的参数，假如需要指定的日期就把这个逻辑注释掉，直接填写在接口body的地方。
-start_date = "20241007"
-end_date = "20241008"
-
 # 创建中文表头映射
 column_mapping = {
     "ts_code": "股票代码",
@@ -29,9 +32,6 @@ column_mapping = {
 
 # 创建空DataFrame用于存储结果
 all_results = pd.DataFrame()
-
-# 生成日期范围
-date_range = pd.date_range(start=start_date, end=end_date)
 
 # 遍历每个日期
 for date in date_range:
@@ -71,8 +71,11 @@ for date in date_range:
 if not all_results.empty:
     # 重命名列
     all_results = all_results.rename(columns=column_mapping)
+    # 使用时间戳生成文件名
+    filename = f'日线行情连续_{current_time}.csv'
     # 保存到CSV文件
-    all_results.to_csv('~/Desktop/bak_daily_all.csv', index=False)
-    print("所有数据已成功保存为 CSV 文件！")
+    all_results.to_csv(f'~/Desktop/{filename}', index=False)
+    print(f"所有数据已成功保存为 {filename}")
 else:
     print("未获取到任何数据")
+
